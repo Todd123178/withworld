@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)backgroundTap:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *high;
 
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @end

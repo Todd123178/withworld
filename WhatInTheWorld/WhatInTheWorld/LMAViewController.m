@@ -18,13 +18,19 @@ NSArray *states;
 NSArray *capitals;
 NSArray *statePics;
 NSString *scoreOut;
+NSString *highScoreOut;
 int score = 0;
 int randNum = 0;
 int tries = 0;
 NSArray *same;
+int highScore;
+NSUserDefaults *prefs;
+
 
 - (void)viewDidLoad
 {
+     prefs = [NSUserDefaults standardUserDefaults];
+    highScore=[prefs integerForKey:@"HighScore"];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
@@ -115,6 +121,8 @@ NSArray *same;
     randNum = 0 + arc4random() % (50 - 0);
     UIImage *pic = [statePics objectAtIndex:randNum];
     [_statePic setImage:pic];
+    highScoreOut= [NSString stringWithFormat:@"%d", highScore];
+    [_high setText:highScoreOut];
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,11 +149,28 @@ NSArray *same;
         [_statePic setImage:replacePic];
         
         [_capitalGuess setText:@""];
-        
+        if(tries==0)
+        {
         score += 100;
+        }
+        else if(tries==1)
+        {
+        score+=50;
+        }
+        
         scoreOut = [NSString stringWithFormat:@"%d", score];
         [_score setText:scoreOut];
-    }
+        if(highScore<=score)
+        {
+        highScore=score;
+        [prefs setInteger:highScore forKey:@"HighScore"];
+        highScoreOut= [NSString stringWithFormat:@"%d", highScore];  
+        [_high setText:highScoreOut];
+            
+        }
+        tries=0;
+        
+     }
     else
     {
         [_capitalGuess setText:@""];
@@ -154,15 +179,23 @@ NSArray *same;
         if(tries == 3)
         {
             [_lblOutput setText:@"Game Over"];
-            
+            highScore=score;
             score = 0;
             scoreOut = [NSString stringWithFormat:@"%d", score];
             [_score setText: scoreOut];
             
             [_lblOutput setText:@"New Game"];
+            
+            
         }
     }
     
+    if(highScore<=score){
+        
+    [prefs setInteger:highScore forKey:@"HighScore"];
+    }
+    [_high setText:highScoreOut];
+    [self.view setNeedsDisplay];
 }
 
 -(IBAction)backgroundTap:(id)sender
