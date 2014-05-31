@@ -10,6 +10,8 @@
 
 @interface LMAViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UILabel *hint;
+
 @property (weak, nonatomic) IBOutlet UITextField *capitalGuess;
 - (IBAction)submitGuess:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblOutput;
@@ -20,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)backgroundTap:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *high;
+@property (weak, nonatomic) IBOutlet UILabel *displayHigh;
+
+@property (weak, nonatomic) IBOutlet UILabel *displayHint;
 
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @end

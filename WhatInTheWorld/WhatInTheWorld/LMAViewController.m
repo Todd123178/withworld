@@ -7,6 +7,7 @@
 //
 
 #import "LMAViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface LMAViewController ()
 
@@ -123,6 +124,7 @@ NSUserDefaults *prefs;
     [_statePic setImage:pic];
     highScoreOut= [NSString stringWithFormat:@"%d", highScore];
     [_high setText:highScoreOut];
+    [_displayHigh setText:highScoreOut];
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,9 +137,12 @@ NSUserDefaults *prefs;
     //int randNum = 0 + arc4random() % (50 - 0);
     
     NSString *name1 = [_capitalGuess text];
+    NSString *lower = [name1 lowercaseString];
     NSString *name2 = [capitals objectAtIndex:randNum];
+    NSString *hint = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:0]];
+    NSString *hint2 = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:1]];
     
-    if([name1 isEqualToString: name2]) {
+    if([lower isEqualToString: name2]) {
         // [same replaceObjectAtIndex: randNum withObject: @"1"];
         NSString *output = [NSString stringWithFormat: @"Correct"];
         [_lblOutput setText:output];
@@ -173,18 +178,36 @@ NSUserDefaults *prefs;
      }
     else
     {
+        if(tries == 0)
+        {
+            hint = [NSString stringWithFormat:@"First letter of capital: %@", hint];
+        [_displayHint setText: hint];
+        }
+        if(tries == 2)
+        {
+            hint2 = [NSString stringWithFormat:@"First part of capital: %@%@", hint, hint2];
+            [_displayHint setText: hint2];
+        }
+        
         [_capitalGuess setText:@""];
         [_lblOutput setText:@"Sorry. Try Again."];
         tries++;
-        if(tries == 3)
+        if(tries == 4)
         {
             [_lblOutput setText:@"Game Over"];
+            [_displayHint setText: @""];
             highScore=score;
             score = 0;
             scoreOut = [NSString stringWithFormat:@"%d", score];
             [_score setText: scoreOut];
             
             [_lblOutput setText:@"New Game"];
+            tries=0;
+            randNum = 0 + arc4random() % (50 - 0);
+            // randNum = random() % 50;
+            UIImage *replacePic = [statePics objectAtIndex:randNum];
+            // UIImage *pic = [UIImage imageNamed: @"alabama.png"];
+            [_statePic setImage:replacePic];
             
             
         }

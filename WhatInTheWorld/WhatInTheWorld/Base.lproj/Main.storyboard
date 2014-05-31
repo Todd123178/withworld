@@ -243,7 +243,7 @@
         <!--View Controller-->
         <scene sceneID="21R-y7-8m7">
             <objects>
-                <viewController id="IDg-FE-oD0" sceneMemberID="viewController">
+                <viewController id="IDg-FE-oD0" customClass="LMAViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cfE-1z-VxB"/>
                         <viewControllerLayoutGuide type="bottom" id="qrk-IH-kij"/>
@@ -273,16 +273,26 @@
                                     <segue destination="yQY-jZ-Mrk" kind="push" id="cY8-HQ-QCG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HIGH SCORE: 2500 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tq-bs-von">
-                                <rect key="frame" x="49" y="442" width="222" height="29"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HIGH SCORE: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tq-bs-von">
+                                <rect key="frame" x="49" y="442" width="162" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcu-EO-Cus">
+                                <rect key="frame" x="211" y="449" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ryZ-Gg-vfS"/>
+                    <connections>
+                        <outlet property="displayHigh" destination="tcu-EO-Cus" id="VOw-jo-l2H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqM-Am-WUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -310,12 +320,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Starts with an &quot;O&quot;" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lbs-4x-0w5">
-                                        <rect key="frame" x="117" y="284" width="213" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0o-ZK-Ns8">
                                         <rect key="frame" x="36" y="355" width="305" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -378,6 +382,12 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THm-Tk-Qkt">
+                                        <rect key="frame" x="117" y="284" width="213" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -386,7 +396,9 @@
                     <navigationItem key="navigationItem" id="hXx-ry-BM1"/>
                     <connections>
                         <outlet property="capitalGuess" destination="cRb-zU-dTp" id="qcY-LR-kNP"/>
+                        <outlet property="displayHint" destination="THm-Tk-Qkt" id="VSi-tZ-Go8"/>
                         <outlet property="high" destination="b5d-4h-wHw" id="0eX-fQ-I3n"/>
+                        <outlet property="hint" destination="THm-Tk-Qkt" id="KyC-Op-5Bg"/>
                         <outlet property="lblOutput" destination="C0o-ZK-Ns8" id="Q2W-80-yCk"/>
                         <outlet property="score" destination="mnO-bH-Q4E" id="OCG-mM-MZr"/>
                         <outlet property="scrollView" destination="2o6-wP-4Up" id="oaY-RQ-phE"/>

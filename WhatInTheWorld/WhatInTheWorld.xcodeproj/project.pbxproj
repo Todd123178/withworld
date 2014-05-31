@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377BBDCD193A6C2F0029250F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377BBDCC193A6C2F0029250F /* AudioToolbox.framework */; };
 		A775EA251923EC1100A1B398 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A775EA241923EC1100A1B398 /* Foundation.framework */; };
 		A775EA271923EC1100A1B398 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A775EA261923EC1100A1B398 /* CoreGraphics.framework */; };
 		A775EA291923EC1100A1B398 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A775EA281923EC1100A1B398 /* UIKit.framework */; };
@@ -94,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		377BBDCC193A6C2F0029250F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A775EA211923EC1100A1B398 /* WhatInTheWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatInTheWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A775EA241923EC1100A1B398 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A775EA261923EC1100A1B398 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -180,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377BBDCD193A6C2F0029250F /* AudioToolbox.framework in Frameworks */,
 				A775EA271923EC1100A1B398 /* CoreGraphics.framework in Frameworks */,
 				A775EA291923EC1100A1B398 /* UIKit.framework in Frameworks */,
 				A775EA251923EC1100A1B398 /* Foundation.framework in Frameworks */,
@@ -221,6 +224,7 @@
 		A775EA231923EC1100A1B398 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				377BBDCC193A6C2F0029250F /* AudioToolbox.framework */,
 				A775EA241923EC1100A1B398 /* Foundation.framework */,
 				A775EA261923EC1100A1B398 /* CoreGraphics.framework */,
 				A775EA281923EC1100A1B398 /* UIKit.framework */,
