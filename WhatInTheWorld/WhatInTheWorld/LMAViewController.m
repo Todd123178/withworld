@@ -21,19 +21,20 @@ NSArray *statePics; // Array of state pictures
 NSString *scoreOut; // String of numbers that will be used to output the score to the screen
 NSString *highScoreOut; // // String of numbers that will be used to output the high score to the screen
 int score = 0; // Sets the score in the app to start at 0
-int randNum = 0;
+int randNum = 0;//declares a random number for use in image and capital arrays
 int tries = 0; // Counts the number of lives/tries for the
-int highScore;
-NSUserDefaults *prefs;
+int highScore;// initializes the high score variable
+
+NSUserDefaults *prefs;//initilizes user defaults
 
 
 - (void)viewDidLoad
 {
-     prefs = [NSUserDefaults standardUserDefaults];
-    highScore=[prefs integerForKey:@"HighScore"];
+     prefs = [NSUserDefaults standardUserDefaults];//sute users defaults
+    highScore=[prefs integerForKey:@"HighScore"];//gets the user default high score if saved
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    //Declares the capitals in an array for use with corresponding photo
     capitals = @[@"montgomery", @"juneau", @"phoenix", @"little rock", @"sacramento",
                  @"denver", @"hartford", @"dover", @"tallahassee", @"atlanta",
                  @"honolulu", @"boise", @"springfield", @"indianapolis", @"des moines",
@@ -44,7 +45,7 @@ NSUserDefaults *prefs;
                  @"oklahoma city", @"salem", @"harrisburg", @"providence", @"columbia",
                  @"pierre", @"nashville", @"austin", @"salt lake city", @"montpelier",
                  @"richmond", @"olympia", @"charleston", @"madison", @"cheyenne"];
-    
+    //declares the state images and stores location
     statePics = [NSArray arrayWithObjects:
                  [UIImage imageNamed:@"alabama.png"],
                  [UIImage imageNamed:@"alaska.png"],
@@ -98,9 +99,7 @@ NSUserDefaults *prefs;
                  [UIImage imageNamed:@"wyoming"],
                  nil];
     
-    // int num = random();
-    //randNum = rand() % 50;
-    //randNum = random() % 50;
+    //get a random number to display a random state
     randNum = 0 + arc4random() % (50 - 0);
     UIImage *pic = [statePics objectAtIndex:randNum];
     [_statePic setImage:pic];
@@ -114,7 +113,7 @@ NSUserDefaults *prefs;
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
 }
-
+//checks for motion of shaking of the screen and will display a popup with the hint
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     NSString *name2 = [capitals objectAtIndex:randNum];
@@ -127,7 +126,7 @@ NSUserDefaults *prefs;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:hint message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
     
         [alertView show];
-        // [alertView release];
+        
     }
     else if(tries == 2)
     {
@@ -135,7 +134,7 @@ NSUserDefaults *prefs;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:hint2 message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
         
         [alertView show];
-        // [alertView release];
+        
     }
 }
 
@@ -144,28 +143,27 @@ NSUserDefaults *prefs;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//worklhourse of the program
 - (IBAction)submitGuess:(UIButton *)sender {
-    //int randNum = 0 + arc4random() % (50 - 0);
     
+    //this will take in the string for a user input
     NSString *name1 = [_capitalGuess text];
-    NSString *lower = [name1 lowercaseString];
+    NSString *lower = [name1 lowercaseString];//makes the users guess lowercase for comparison
     NSString *name2 = [capitals objectAtIndex:randNum];
-    //NSString *hint = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:0]];
-    //NSString *hint2 = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:1]];
-    
+   //Checks to see if the users guess matches the state
     if([lower isEqualToString: name2]) {
-        // [same replaceObjectAtIndex: randNum withObject: @"1"];
+        
         NSString *output = [NSString stringWithFormat: @"Correct"];
         [_lblOutput setText:output];
-        
+        //declares new random number
         randNum = 0 + arc4random() % (50 - 0);
-        // randNum = random() % 50;
-        UIImage *replacePic = [statePics objectAtIndex:randNum];
-        // UIImage *pic = [UIImage imageNamed: @"alabama.png"];
+        
+        UIImage *replacePic = [statePics objectAtIndex:randNum];//resets trandom image
+       
         [_statePic setImage:replacePic];
         
         [_capitalGuess setText:@""];
+        //assigns point value based on tries
         if(tries==0)
         {
         score += 100;
@@ -174,7 +172,11 @@ NSUserDefaults *prefs;
         {
         score+=50;
         }
-        
+        else if(tries==2)
+        {
+        score+=25;
+        }
+        //sets score out
         scoreOut = [NSString stringWithFormat:@"%d", score];
         [_score setText:scoreOut];
         if(highScore<=score)
@@ -188,19 +190,9 @@ NSUserDefaults *prefs;
         tries=0;
         
      }
+    //if guess is wrong
     else
     {
-        if(tries == 0)
-        {
-            // hint = [NSString stringWithFormat:@"First letter of capital: %@", hint];
-            // [_displayHint setText: hint];
-        }
-        if(tries == 2)
-        {
-            // hint2 = [NSString stringWithFormat:@"First part of capital: %@%@", hint, hint2];
-            // [_displayHint setText: hint2];
-        }
-        
         [_capitalGuess setText:@""];
         [_lblOutput setText:@"Sorry. Try Again."];
         tries++;
@@ -224,6 +216,7 @@ NSUserDefaults *prefs;
             
         }
     }
+    //this checks to see if high score is greater than what is saved and if it is sets the new high score
     
     if(highScore<=score){
         
