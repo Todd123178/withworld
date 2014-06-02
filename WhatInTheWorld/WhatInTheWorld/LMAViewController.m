@@ -8,6 +8,7 @@
 
 #import "LMAViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface LMAViewController ()
 
@@ -15,15 +16,13 @@
 
 @implementation LMAViewController
 
-NSArray *states;
-NSArray *capitals;
-NSArray *statePics;
-NSString *scoreOut;
-NSString *highScoreOut;
-int score = 0;
+NSArray *capitals; // Array of capital names
+NSArray *statePics; // Array of state pictures
+NSString *scoreOut; // String of numbers that will be used to output the score to the screen
+NSString *highScoreOut; // // String of numbers that will be used to output the high score to the screen
+int score = 0; // Sets the score in the app to start at 0
 int randNum = 0;
-int tries = 0;
-NSArray *same;
+int tries = 0; // Counts the number of lives/tries for the
 int highScore;
 NSUserDefaults *prefs;
 
@@ -34,23 +33,6 @@ NSUserDefaults *prefs;
     highScore=[prefs integerForKey:@"HighScore"];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    same = @[@"0", @"0", @"0", @"0", @"0",
-             @"0", @"0", @"0", @"0", @"0",
-             @"0", @"0", @"0", @"0", @"0",
-             @"0", @"0", @"0", @"0", @"0",
-             @"0", @"0", @"0", @"0", @"0"];
-    
-    states = @[@"alabama", @"alaska", @"arizona", @"arkansas", @"california",
-               @"colorado", @"connecticut", @"deleware", @"florida", @"georgia",
-               @"hawaii", @"idaho", @"illinois", @"indiana", @"iowa",
-               @"kansas", @"kentucky", @"louisiana", @"maine", @"maryland",
-               @"massachusetts", @"michigan", @"minnesota", @"mississippi", @"missouri",
-               @"montana", @"nebraska", @"nevada", @"new hampshire", @"new jersey",
-               @"new mexico", @"new york", @"north carolina", @"north dakota", @"ohio",
-               @"oklahoma", @"oregon", @"pennsylvania", @"rhode island", @"south carolina",
-               @"south dakota", @"tennessee", @"texas", @"utah", @"vermont",
-               @"virginia", @"washington", @"west virginia", @"wisconsin", @"wyoming"];
     
     capitals = @[@"montgomery", @"juneau", @"phoenix", @"little rock", @"sacramento",
                  @"denver", @"hartford", @"dover", @"tallahassee", @"atlanta",
@@ -127,6 +109,36 @@ NSUserDefaults *prefs;
     [_displayHigh setText:highScoreOut];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+-(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    NSString *name2 = [capitals objectAtIndex:randNum];
+    NSString *hint = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:0]];
+    NSString *hint2 = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:1]];
+    
+    if(tries == 1)
+    {
+        hint = [NSString stringWithFormat:@"HINT: First letter of capital is '%@'", hint];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:hint message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+    
+        [alertView show];
+        // [alertView release];
+    }
+    else if(tries == 2)
+    {
+        hint2 = [NSString stringWithFormat:@"HINT: First part of capital is '%@%@'", hint, hint2];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:hint2 message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+        
+        [alertView show];
+        // [alertView release];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -139,8 +151,8 @@ NSUserDefaults *prefs;
     NSString *name1 = [_capitalGuess text];
     NSString *lower = [name1 lowercaseString];
     NSString *name2 = [capitals objectAtIndex:randNum];
-    NSString *hint = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:0]];
-    NSString *hint2 = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:1]];
+    //NSString *hint = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:0]];
+    //NSString *hint2 = [name2 substringWithRange:[name2 rangeOfComposedCharacterSequenceAtIndex:1]];
     
     if([lower isEqualToString: name2]) {
         // [same replaceObjectAtIndex: randNum withObject: @"1"];
@@ -180,13 +192,13 @@ NSUserDefaults *prefs;
     {
         if(tries == 0)
         {
-            hint = [NSString stringWithFormat:@"First letter of capital: %@", hint];
-        [_displayHint setText: hint];
+            // hint = [NSString stringWithFormat:@"First letter of capital: %@", hint];
+            // [_displayHint setText: hint];
         }
         if(tries == 2)
         {
-            hint2 = [NSString stringWithFormat:@"First part of capital: %@%@", hint, hint2];
-            [_displayHint setText: hint2];
+            // hint2 = [NSString stringWithFormat:@"First part of capital: %@%@", hint, hint2];
+            // [_displayHint setText: hint2];
         }
         
         [_capitalGuess setText:@""];
@@ -220,6 +232,8 @@ NSUserDefaults *prefs;
     [_high setText:highScoreOut];
     [self.view setNeedsDisplay];
 }
+
+
 
 -(IBAction)backgroundTap:(id)sender
 {

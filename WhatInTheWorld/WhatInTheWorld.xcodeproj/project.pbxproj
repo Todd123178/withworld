@@ -82,6 +82,7 @@
 		A775EB5E1924045900A1B398 /* wisconsin.png in Resources */ = {isa = PBXBuildFile; fileRef = A775EB271924045900A1B398 /* wisconsin.png */; };
 		A775EB5F1924045900A1B398 /* wyoming.png in Resources */ = {isa = PBXBuildFile; fileRef = A775EB281924045900A1B398 /* wyoming.png */; };
 		A775EB611924093800A1B398 /* 48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = A775EB601924093800A1B398 /* 48x48.png */; };
+		A79461D0193D14CE003B550B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79461CF193D14CE003B550B /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		A775EB271924045900A1B398 /* wisconsin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wisconsin.png; sourceTree = "<group>"; };
 		A775EB281924045900A1B398 /* wyoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wyoming.png; sourceTree = "<group>"; };
 		A775EB601924093800A1B398 /* 48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 48x48.png; sourceTree = "<group>"; };
+		A79461CF193D14CE003B550B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79461D0193D14CE003B550B /* CoreMotion.framework in Frameworks */,
 				377BBDCD193A6C2F0029250F /* AudioToolbox.framework in Frameworks */,
 				A775EA271923EC1100A1B398 /* CoreGraphics.framework in Frameworks */,
 				A775EA291923EC1100A1B398 /* UIKit.framework in Frameworks */,
@@ -224,6 +227,7 @@
 		A775EA231923EC1100A1B398 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A79461CF193D14CE003B550B /* CoreMotion.framework */,
 				377BBDCC193A6C2F0029250F /* AudioToolbox.framework */,
 				A775EA241923EC1100A1B398 /* Foundation.framework */,
 				A775EA261923EC1100A1B398 /* CoreGraphics.framework */,
